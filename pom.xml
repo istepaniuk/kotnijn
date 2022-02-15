@@ -72,14 +72,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>com.istepaniuk.kotnijn.MainKt</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
