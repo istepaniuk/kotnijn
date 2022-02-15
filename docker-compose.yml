@@ -1,4 +1,7 @@
-version: "2"
+version: "3.2"
+
+networks:
+  kotmijn-network:
 
 services:
   kotnijn:
@@ -7,14 +10,14 @@ services:
       context: .
     depends_on:
       - rabbitmq
+    networks:
+      - kotmijn-network
 
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
     ports:
       - "15672:15672"
       - "5672:5672"
+    networks:
+      - kotmijn-network
 
-  buster:
-    image: debian:buster
-    depends_on:
-      - rabbitmq

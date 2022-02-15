@@ -9,9 +9,9 @@ import java.nio.charset.StandardCharsets
 fun main() {
     println("Connecting...")
     val factory = ConnectionFactory()
-    val connection = factory.newConnection("amqp://guest:guest@rabbitmq:5672/")
+    factory.host = "rabbitmq"
+    val connection = factory.newConnection()
     val channel = connection.createChannel()
-
     channel.queueDeclare("some-queue", false, false, false, null)
 
     println("Waiting for messages...")
