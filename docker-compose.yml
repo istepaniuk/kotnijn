@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     build:
       context: .
+    environment:
+      RABBITMQ_HOST: rabbitmq
     depends_on:
       - rabbitmq
     networks:

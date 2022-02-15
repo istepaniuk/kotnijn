@@ -7,9 +7,11 @@ import com.rabbitmq.client.Delivery
 import java.nio.charset.StandardCharsets
 
 fun main() {
-    println("Connecting...")
+    val rabbitHost = System.getenv("RABBITMQ_HOST")
+    println("Connecting to $rabbitHost...")
+
     val factory = ConnectionFactory()
-    factory.host = "rabbitmq"
+    factory.host = rabbitHost
     val connection = factory.newConnection()
     val channel = connection.createChannel()
     channel.queueDeclare("some-queue", false, false, false, null)
