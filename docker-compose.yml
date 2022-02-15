@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  kotnijn:
+    restart: unless-stopped
+    build:
+      context: .
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3.9-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  buster:
+    image: debian:buster
+    depends_on:
+      - rabbitmq

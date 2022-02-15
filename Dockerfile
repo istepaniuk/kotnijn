@@ -10,11 +10,13 @@ COPY src /build/src
 RUN ["mvn", "package"]
 
 
-FROM ghcr.io/graalvm/native-image:java17-21.3.0 AS native-image-builder
+FROM ghcr.io/graalvm/native-image:ol8-java17-22.0.0.2 AS native-image-builder
 
-COPY --from=maven-builder /build/target/kotnijn-1.0-SNAPSHOT.jar /
+COPY --from=maven-builder /build/target/kotnijn-1.0-SNAPSHOT-jar-with-dependencies.jar /
 
-RUN native-image --static -jar ./kotnijn-1.0-SNAPSHOT.jar -H:Name=kotnijn
+RUN native-image --no-fallback --static -jar ./kotnijn-1.0-SNAPSHOT-jar-with-dependencies.jar \
+    -H:Name=kotnijn \
+    -H:+ReportUnsupportedElementsAtRuntime
 
 
 FROM scratch
