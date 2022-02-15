@@ -29,6 +29,7 @@ COPY --from=graalvm-builder /kotnijn /
 RUN mkdir /build && dockerize --no-build --output-dir /build /kotnijn
 
 
+# Finally, build the application image with ust the binary and needed shared libs
 FROM scratch
 
 COPY --from=dockerize-builder /build /
